@@ -3,7 +3,7 @@ include 'koneksi.php';
 include 'tasks.php';
 
 $koneksi = connectDatabase();
-
+  
 // Tambah Task
 if (isset($_POST['tambah_tugas'])) {
     tambahTugas($koneksi, $_POST['tugas'], $_POST['prioritas'], $_POST['date']);
@@ -53,7 +53,7 @@ $result = ambilDataTugas($koneksi);
 
 <table class="table table-stripped">
     <thead>
-        <tr>
+        <tr align="center">
             <th>No</th>
             <th>Tugas</th>
             <th>Prioritas</th>
@@ -67,7 +67,7 @@ $result = ambilDataTugas($koneksi);
         if (mysqli_num_rows($result) > 0) {
             $no = 1;
             while ($row = mysqli_fetch_assoc($result)) { ?>
-                <tr>
+                <tr align="center">
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $row['tugas'] ?></td>
                     <td>
@@ -96,6 +96,7 @@ $result = ambilDataTugas($koneksi);
                         if ($row['status'] == 0) { ?>
                             <a href="?complete=<?php echo $row['id'] ?>" class="btn btn-success">Selesai</a>
                         <?php } ?>
+                        <a href="formedit.php?id=<?php echo $row['id'] ?>" class="btn btn-warning">edit</a>
                         <a href="?delete=<?php echo $row['id'] ?>" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
